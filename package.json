@@ -1,0 +1,24 @@
+{
+	"name": "github-area-top-users",
+	"version": "0.1.0",
+	"description": "Top gitHub users rank generation script for a given geographical area population query",
+	"author": "Jorge Moreno, @alterebro. (www.moro.es)",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alterebro/area-top-github-users.git"
+	},
+	"bugs": {
+		"url": "https://github.com/alterebro/area-top-github-users/issues"
+	},
+	"homepage": "http://alterebro.github.io/area-top-github-users",
+	"main": "app/app.js",
+	"scripts": {
+		"start": "node app/app.js"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"cheerio": "^0.20.0",
+		"junk": "^1.0.3",
+		"superagent": "^2.1.0"
+	}
+}
