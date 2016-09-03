@@ -11,9 +11,9 @@
 		"url": "https://github.com/alterebro/area-top-github-users/issues"
 	},
 	"homepage": "http://alterebro.github.io/area-top-github-users",
-	"main": "app/app.js",
+	"main": "app/main.js",
 	"scripts": {
-		"start": "node app/app.js"
+		"start": "node app/main.js"
 	},
 	"license": "MIT",
 	"devDependencies": {
