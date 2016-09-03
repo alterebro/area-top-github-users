@@ -1,8 +1,8 @@
 ## Top GitHub users from a geographical area population.
 
-*( Unfinished - Work in progress )*
+Top GitHub users rank generator script for a given geographical area population query.
 
-Top GitHub users rank generator script for a given geographical area population query. [alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/)
+***( Unfinished - Work in progress )*** // *[alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/app.html)*
 
 
 1. Install dependencies
