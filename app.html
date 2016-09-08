@@ -28,24 +28,33 @@
 	<link rel="stylesheet" type="text/css" href="frontend/_src.armazon.css" />
 	<link rel="stylesheet" type="text/css" href="frontend/_src.app.css" />
 </head>
-<body>
+<body id="app">
 
 <header>
 	<h1>area-top-github-users [app.html]</h1>
+	<ul>
+		<li>{{ data_folders }}</li>
+		<li>{{ data_locations }}</li>
+		<li>{{ data_filedata }}</li>
+	</ul>
 	<hr />
 </header>
 
 <main>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut dictum erat, et tristique dui.
-		Proin ac quam quam. Pellentesque ut rutrum felis. Integer aliquet metus vel blandit fermentum.
-		Duis efficitur, metus at cursus eleifend, mauris quam vehicula augue, sed rutrum sem lacus quis velit.
-		Vestibulum laoreet est vitae neque facilisis, at lobortis lacus vestibulum. Duis nulla enim, aliquet ut
-		nibh nec, ultricies condimentum risus. Praesent eu leo at tellus posuere suscipit. Ut tristique justo
-		dignissim porta pretium. In tincidunt ligula eu molestie bibendum. Sed scelerisque quis lectus sed lacinia.
-		Curabitur vitae cursus sem, non vehicula augue. Pellentesque malesuada nibh sed nibh rhoncus convallis.
-		Nunc magna eros, vestibulum a cursus eget, dignissim sit amet purus. Morbi sagittis viverra rhoncus.
-	</p>
+	<ul v-for="item in data_items | limitBy 20">
+		<li>{{ item.id }}</li>
+		<li>{{ item.login }}</li>
+		<li>{{ item.avatar }}</li>
+		<li>{{ item.url }}</li>
+		<li>{{ item.name }}</li>
+		<li>{{ item.company }}</li>
+		<li>{{ item.location }}</li>
+		<li>{{ item.blog }}</li>
+		<li>{{ item.bio }}</li>
+		<li>{{ item.followers }}</li>
+		<li>{{ item.following }}</li>
+		<li>{{ item.contributions }}</li>
+	</ul>
 </main>
 
 <footer>
