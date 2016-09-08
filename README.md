@@ -2,7 +2,7 @@
 
 Top GitHub users rank generator script for a given geographical area population query.
 
-***( Unfinished - Work in progress )*** // *[alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/app.html)*
+***( Unfinished - Work in progress )*** // *[alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/)*
 
 
 1. Install dependencies
@@ -48,3 +48,19 @@ Top GitHub users rank generator script for a given geographical area population 
 	```sh
 	$ npm start
 	```
+
+---
+
+### FrontEnd Development
+
+The FrontEnd is built using [Gulp](http://gulpjs.com/), it can be installed via **npm**:
+
+```sh
+$ npm install --global gulp-cli
+```
+
+The development HTML file is `./_app.html` and the related scripts and styles are located on the `/frontend` folder named with the prefix `_src`. In order to create the distributable files you have to run the default gulp task which will execute the building and compressing tasks.
+
+```sh
+$ gulp
+```
