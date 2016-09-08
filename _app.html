@@ -33,8 +33,11 @@
 <body id="app">
 
 <header>
-	<h1>area-top-github-users [app.html]</h1>
-	<ul>
+	<h1>area-top-github-users</h1>
+	<p v-if="data_error_loading">
+		error loading data.json file
+	</p>
+	<ul v-else>
 		<li>{{ data_folders }}</li>
 		<li>{{ data_locations }}</li>
 		<li>{{ data_filedata }}</li>
@@ -43,7 +46,7 @@
 </header>
 
 <main>
-	<ul v-for="item in data_items | limitBy 20">
+	<ul v-for="item in data_items">
 		<li>{{ item.id }}</li>
 		<li>{{ item.login }}</li>
 		<li>{{ item.avatar }}</li>
