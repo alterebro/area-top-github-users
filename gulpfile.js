@@ -3,7 +3,8 @@ var gulp 		= require('gulp'),
 	htmlmin 	= require('gulp-htmlmin'),
 	useref 		= require('gulp-useref'),
 	gulpIf 		= require('gulp-if'),
-	uglify 		= require('gulp-uglify');
+	uglify 		= require('gulp-uglify'),
+	sequence 	= require('gulp-sequence');
 
 gulp.task('build', function() {
 	return 	gulp.src("./_app.html")
@@ -18,4 +19,4 @@ gulp.task('compress', function() {
 			.pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['build', 'compress']);
+gulp.task('default', sequence('build', 'compress'));
