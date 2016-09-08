@@ -31,8 +31,36 @@ function date_id() {
 // ==============================================
 
 
-// ----------------------
-// Scraper --------------
+// ------------------------------------------
+// Create file: data/data.json --------------
+function create_data_file() {
+	function is_dir(element) {
+		return fs.lstatSync('./data/'+element).isDirectory()
+	}
+
+	var folders = fs.readdirSync('./data');
+	    folders = folders.filter(junk.not);
+		folders = folders.filter(is_dir);
+		folders = folders.slice(0, 2);
+		folders.sort();
+		folders.reverse();
+
+	var locations = fs.readdirSync('./data/'+folders[folders.length-1]);
+		locations = locations.filter(junk.not);
+
+		var data = {};
+			data['folders'] = folders;
+			data['locations'] = locations;
+
+			console.log(data);
+			console.log(JSON.stringify(data));
+
+	fs.writeFileSync( './data/data.json', JSON.stringify(data), 'utf-8');
+}
+
+
+// ------------------------------------------
+// Scraper ----------------------------------
 function get_users( location_config ) {
 
     // There's a limit of 1K first matches on GitHub (10pages of 100)
@@ -125,7 +153,6 @@ function get_user_details() {
                 user['followers']       = false;
                 user['following']       = false;
                 user['contributions']   = false;
-                // user['languages']    = false;
 
                 if (res) {
 
@@ -176,7 +203,6 @@ function get_user_details() {
                         }
                     }
                 }
-
 
                 if ( !exclude_user_by_location && !exclude_user_by_loginname ) {
 
@@ -233,17 +259,20 @@ function export_data() {
     console.log( ' ! error users: (#) ', error_users.length );
 
     // DONE. Go to the next item if apply
+	// ELSE create the data/data.json file
     iterator++;
     if ( iterator < config.length ) { run(); }
+	else { create_data_file(); }
 }
 
+
 // ==============================================
 // ==============================================
 
-// -----------------
-// Init
+
+// ------------------------------------------
+// Init -------------------------------------
 function run() {
-
 
     // Reset all users data
     error_users = [];
@@ -265,14 +294,13 @@ function run() {
 
         // go!
         get_users( current_config );
-
     }
 }
 
 var error_users = [];
 var the_users = [];
 var iterator = 0;
-var skip_if_exists = false;
+var skip_if_exists = true;
 var target_folder = './data/' + date_id() + '/';
     if (!fs.existsSync( target_folder )){ fs.mkdirSync( target_folder ); }
 
