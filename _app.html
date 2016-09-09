@@ -33,16 +33,15 @@
 <body id="app">
 
 <header>
-	<h1>area-top-github-users</h1>
-	<p v-if="data_error_loading">
-		error loading data.json file
-	</p>
+	<h1><strong>GitHub Top Users</strong> Area Ranking</h1>
 	<hr />
 </header>
 
 <main>
-
-	<ol>
+	<p v-if="data_error_loading">
+		error loading data.json file
+	</p>
+	<ol v-else>
 		<li v-for="(index, item) in data_items_parsed">
 			<h3 :data-rank="index | rank_num">
 				<strong>{{ item.name | ucwords }}</strong>
@@ -58,17 +57,16 @@
 					{{ item.location }}
 				</li>
 			</ul>
-			<ul>
-				<li><strong>Contributions: {{ item.contributions }}</strong></li>
+			<ul class="user-contribs">
+				<li><strong><em>Contributions:</em> {{ item.contributions }}</strong></li>
 			</ul>
 			<ul class="user-follow">
-				<li>Following: {{ item.following }}</li>
-				<li>Followers: {{ item.followers }}</li>
+				<li><em>Following:</em> {{ item.following }}</li>
+				<li><em>Followers:</em> {{ item.followers }}</li>
 			</ul>
 			<figure><img :src="item.avatar + '&amp;s=128'" :alt="item.name" /></figure>
 		</li>
 	</ol>
-
 </main>
 
 <footer>

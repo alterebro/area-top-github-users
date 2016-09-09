@@ -1,13 +1,16 @@
+@import 'https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700';
+
 body {
 	width: 90%;
 	max-width: 780px;
 	margin: 3rem auto;
+	font-family: 'Fira Sans', sans-serif;
+}
+ul, p {
+	font-weight: 300;
 }
 
-
-
 main {
-
 
 	ol {
 		list-style: none;
@@ -17,7 +20,7 @@ main {
 		> li {
 
 			position: relative;
-			padding: 0 160px 0 0;
+			padding: 0 180px 0 0;
 			min-height: 180px;
 
 			figure {
@@ -28,6 +31,24 @@ main {
 				img {
 					width: 96px;
 					height: 96px;
+				}
+			}
+
+			ul.user-contribs {
+				position: absolute;
+				top: 0;
+				right: 110px;
+
+				font-size: 2rem;
+				margin: 0;
+				padding: .5rem 0;
+				text-align: right;
+
+				strong {
+					font-weight: 300;
+				}
+				em {
+					display: none;
 				}
 			}
 
@@ -62,7 +83,6 @@ main {
 					font-size: 1.3rem;
 				}
 			}
-
 
 		}
 	}
