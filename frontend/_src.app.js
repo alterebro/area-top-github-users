@@ -1,4 +1,7 @@
 
+
+
+
 var data_file = 'data/data.json';
 
 var vd = {
@@ -7,7 +10,8 @@ var vd = {
 	data_folders : null,
 	data_locations : null,
 	data_filedata : null,
-	data_items : null
+	data_items : null,
+	data_items_parsed : null
 };
 
 var vm = new Vue({
@@ -18,7 +22,55 @@ var vm = new Vue({
 		this.getDataFile();
     },
 
+	filters: {
+
+		rank_num : function(n) {
+			var out = n + 1;
+				out = ( out < 10 ) ? '0' + out : out;
+			return '#' + out + '. ';
+		},
+
+		nice_url : function(u) {
+			var url = u.replace('https://', '');
+				url = url.replace('http://', '');
+				url = url.replace('www.', '');
+				url = ( url[url.length-1] == '/' ) ? url.substring(0, url.length-1) : url;
+				url = ( url.length > 35 ) ? url.substring(0, 32) + '...' : url;
+			return url;
+		},
+
+		ucwords : function(str) {
+			// http://locutus.io/php/strings/ucwords/
+			return (str + '').replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function ($1) {
+				return $1.toUpperCase();
+			});
+		}
+
+	},
+
+	computed: {
+
+		data_items_parsed : function() {
+
+			var output = [];
+
+			for ( var i=0; i<25; i++ ) {
+			// for ( var i=0; i<this.data_items.length; i++ ) {
+
+				var item = this.data_items[i];
+					item['name'] = (!item['name']) ? item['login'] : item['name'];
+					item['has_user_bio'] = ( !!item['bio'] || !!item['blog'] );
+
+				output.push( item );
+			}
+			return output;
+
+		}
+
+	},
+
 	methods: {
+
 		getDataFile: function () {
 
 			var self = this
@@ -59,6 +111,7 @@ var vm = new Vue({
 				}
 				xhr.send();
 				xhr = null;
+
 		}
 
 	}

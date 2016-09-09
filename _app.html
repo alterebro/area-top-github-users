@@ -37,29 +37,38 @@
 	<p v-if="data_error_loading">
 		error loading data.json file
 	</p>
-	<ul v-else>
-		<li>{{ data_folders }}</li>
-		<li>{{ data_locations }}</li>
-		<li>{{ data_filedata }}</li>
-	</ul>
 	<hr />
 </header>
 
 <main>
-	<ul v-for="item in data_items">
-		<li>{{ item.id }}</li>
-		<li>{{ item.login }}</li>
-		<li>{{ item.avatar }}</li>
-		<li>{{ item.url }}</li>
-		<li>{{ item.name }}</li>
-		<li>{{ item.company }}</li>
-		<li>{{ item.location }}</li>
-		<li>{{ item.blog }}</li>
-		<li>{{ item.bio }}</li>
-		<li>{{ item.followers }}</li>
-		<li>{{ item.following }}</li>
-		<li>{{ item.contributions }}</li>
-	</ul>
+
+	<ol>
+		<li v-for="(index, item) in data_items_parsed">
+			<h3 :data-rank="index | rank_num">
+				<strong>{{ item.name | ucwords }}</strong>
+				<a href="{{ item.url }}">@{{ item.login }}</a>
+			</h3>
+			<ul>
+				<li class="user-bio" v-if="item.has_user_bio">
+					{{ item.bio }}
+					<a href="{{ item.blog }}">{{ item.blog | nice_url }}</a>
+				</li>
+				<li class="user-location">
+					<strong v-if="item.company">{{ item.company }}. </strong>
+					{{ item.location }}
+				</li>
+			</ul>
+			<ul>
+				<li><strong>Contributions: {{ item.contributions }}</strong></li>
+			</ul>
+			<ul class="user-follow">
+				<li>Following: {{ item.following }}</li>
+				<li>Followers: {{ item.followers }}</li>
+			</ul>
+			<figure><img :src="item.avatar + '&amp;s=128'" :alt="item.name" /></figure>
+		</li>
+	</ol>
+
 </main>
 
 <footer>
