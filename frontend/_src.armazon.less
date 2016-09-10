@@ -11,9 +11,9 @@
 @armazon-columns-margin 		: 3.6; 		// Amount of percent margin on Grid Columns ( Percentual Value )
 @armazon-columns-tablet-margin 	: 2; 		// Percent margin when breaking into Tablet Mode
 
-@armazon-color-background 		: #fafbfc;	// Global Background Color
-@armazon-color-foreground 		: #262524; 	// Global Foreground & Text Color
-@armazon-color-primary 			: #229def; 	// Links and Buttons Color
+@armazon-color-background 		: #fff;	// Global Background Color
+@armazon-color-foreground 		: #333; 	// Global Foreground & Text Color
+@armazon-color-primary 			: #09c; 	// Links and Buttons Color
 @armazon-color-neutral 			: #a0a0a0; 	// Neutral Grey
 
 // --------------------------------------------
@@ -83,10 +83,6 @@ a:active, a:hover {
 	color: @armazon-color-foreground;
 	border-bottom: solid @armazon-color-primary 1px;
 }
-a:focus{
-	outline: solid fade(@armazon-color-primary, 50%) 1px;
-	box-shadow: 0 0 5px 2px fade(@armazon-color-primary, 30%);
-}
 a, a * {
 	.transition();
 }
@@ -97,7 +93,7 @@ abbr[title], acronym[title] {
 	cursor: help;
 }
 b, strong {
-	font-weight: bold;
+//	font-weight: bold;
 }
 dfn {
 	font-style: italic;
@@ -118,40 +114,12 @@ sub, sup {
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 
-blockquote {
-	quotes: "\201C""\201D""\2018""\2019";
-	&:before {
-		color: @armazon-color-neutral;
-		font-size: 4rem;
-		line-height: 0.1em;
-		padding: 0 .25rem;
-	}
-	&:before {
-		content: open-quote;
-		vertical-align: -1rem;
-	}
-	p { display: inline; }
-}
 
 // --------------------------------------------
-// Embedded content
 img {
 	border: 0;
 	display: block;
-	margin: 0 0 @armazon-margin/2 0;
-	padding: .5rem;
-	border: solid lighten(@armazon-color-neutral, 20%) 1px;
-	box-shadow: 0 2px 0 lighten(@armazon-color-neutral, 30%);
 	max-width: 100%;
-}
-svg:not(:root) {
-	overflow: hidden;
-}
-
-// --------------------------------------------
-// Grouping content
-figure {
-	margin: 1em 4em;
 }
 hr {
 	height: 0;
@@ -160,335 +128,8 @@ hr {
 	border-top: dotted lighten(@armazon-color-neutral, 20%) 1px;
 }
 
-// --------------------------------------------
-// Code
-pre {
-	overflow: auto;
-}
-code {
-	white-space: nowrap;
-	border-radius: 3px;
-	padding: .3rem .5rem;
-	background: lighten(@armazon-color-neutral, 30%);
-	color: darken(@armazon-color-neutral, 10%);
-}
-pre > code {
-	overflow: auto;
-	display: block;
-	padding: (@armazon-margin / 2);
-	white-space: pre;
-	line-height: 1.5;
-	background: lighten(@armazon-color-foreground, 10%);
-	color: darken(@armazon-color-background, 10%);
-}
-code, kbd, pre, samp {
-	font-family: monospace;
-	font-size: 95%;
-	text-shadow: none;
-}
-
-// --------------------------------------------
-// Forms
-
-// --- Buttons --------------------------------
-button,
-input,
-optgroup,
-select,
-textarea {
-	color: inherit;
-	font: inherit;
-	margin: 0;
-}
-button {
-	overflow: visible;
-}
-button,
-select {
-	text-transform: none;
-}
-.button, .boton,
-button,
-html input[type="button"],
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-//	-webkit-appearance: button;
-	cursor: pointer;
-	display: inline-block;
-	text-transform: uppercase;
-	font-size: 1rem;
-	font-weight: 700;
-	letter-spacing: .25rem;
-	text-align: center;
-	color: @armazon-color-background;
-	background: @armazon-color-primary;
-	border: none;
-	white-space: nowrap;
-	border-radius: 3px;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, .1);
-	vertical-align: top;
-
-	min-width: 24rem;
-	max-width: 100%;
-	padding: 0 3.2rem;
-	height: 4rem;
-	line-height: 4rem;
-	.transition();
-}
-.button:hover, .button:focus, .boton:hover, .boton:focus,
-button:hover, button:focus,
-html input[type="button"]:hover, html input[type="button"]:focus,
-input[type="button"]:hover, input[type="button"]:focus,
-input[type="reset"]:hover, input[type="reset"]:focus,
-input[type="submit"]:hover, input[type="submit"]:focus {
-	text-decoration: none;
-	background: @armazon-color-foreground;
-	color: @armazon-color-background;
-	border: none;
-	outline: 0;
-}
-button[disabled], button[disabled]:hover, button[disabled]:focus,
-html input[disabled], html input[disabled]:hover, html input[disabled]:focus {
-	cursor: default;
-	background: @armazon-color-neutral;
-}
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
-
-input {
-	line-height: normal;
-}
-
-// --- Input Elements -------------------------
-input[type="checkbox"],
-input[type="radio"] {
-	padding: 0;
-	display: inline;
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-	height: auto;
-}
-input[type="search"] {
-	-webkit-appearance: textfield;
-}
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-	-webkit-appearance: none;
-}
-
-fieldset {
-	border: solid lighten(@armazon-color-neutral, 20%) 1px;
-	margin: 0 1px;
-	padding: @armazon-margin/2 @armazon-margin;
-}
-legend {
-	border: 0;
-	padding: 0;
-}
-label {
-	display: block;
-}
-textarea {
-	overflow: auto;
-}
-optgroup {
-	font-weight: bold;
-}
-
-// --- More Elements --------------------------
-input[type="date"],
-input[type="time"],
-input[type="email"],
-input[type="number"],
-input[type="search"],
-input[type="text"],
-input[type="tel"],
-input[type="url"],
-input[type="password"],
-textarea,
-select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	background: #fff;
-	border: solid lighten(@armazon-color-neutral, 20%) 1px;
-	border-radius: none;
-	display: inline-block;
-	vertical-align: top;
-	padding: .5rem 1rem;
-	width: 100%;
-	max-width: 30rem;
-	height: 4rem;
-	.transition();
-}
-select {
-	border: none;
-	outline: 1px solid lighten(@armazon-color-neutral, 20%);
-	outline-offset: -1px;
-	border-radius: 0;
-	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAPAQMAAAA1YcYVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkUxNzU1QTlBNzZDMTFFNUFFODhCOENCNDg0MUFBMjUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkUxNzU1QUFBNzZDMTFFNUFFODhCOENCNDg0MUFBMjUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RTE3NTVBN0E3NkMxMUU1QUU4OEI4Q0I0ODQxQUEyNSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2RTE3NTVBOEE3NkMxMUU1QUU4OEI4Q0I0ODQxQUEyNSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PszxATYAAAAGUExURczMzMzMzL4bSpkAAAABdFJOUwBA5thmAAAAPElEQVQI12MQYBBgsADCGiD8B4T1jH8Y7Jt/MMgf/8DA//4BA/v/AwzM/xsYGP8zMAClGYDKGIDKGYDaABK9EHmI0q4WAAAAAElFTkSuQmCC');
-	background-repeat: no-repeat;
-	background-size: 12px 8px;
-	background-position: 96% 50%;
-
-	// Don't Apply the: Removes awkward default styles on some inputs for iOS.
-	//	-webkit-appearance: menulist;
-	//	-moz-appearance: menulist;
-	//	appearance: menulist;
-}
-textarea {
-	min-height: 12rem;
-}
-
-input[type="date"]:focus,
-input[type="time"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-input[type="search"]:focus,
-input[type="text"]:focus,
-input[type="tel"]:focus,
-input[type="url"]:focus,
-input[type="password"]:focus,
-textarea:focus,
-select:focus {
-	border: solid @armazon-color-primary 1px;
-	outline: 0;
-}
-select:focus {
-	border: none;
-	outline: solid @armazon-color-primary 1px;
-	outline-offset: -1px;
-	border-radius: 0;
-}
-
-// --------------------------------------------
-// Tables
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	width: 100%;
-	font-size: 1.4rem;
-
-	caption {
-		text-align: left;
-		padding: @armazon-margin/4 @armazon-margin/2;
-		font-weight: bold;
-		font-size: 1.3rem;
-		letter-spacing: .05rem;
-		text-transform: uppercase;
-	}
-	th, td {
-		padding: @armazon-margin/3 @armazon-margin/2;
-		text-align: left;
-		vertical-align: baseline;
-	}
-	th {
-		font-weight: bold;
-		font-size: 1.1rem;
-		letter-spacing: .05rem;
-		text-transform: uppercase;
-	}
-    thead {
-        th {
-			border-bottom: solid lighten(@armazon-color-neutral, 20%) 1px;
-		}
-    }
-	tbody {
-		tr:nth-child(even) td,
-		tr:nth-child(even) th {
-			background: lighten(@armazon-color-neutral, 30%);
-		}
-	}
-	tfoot {
-		th, td {
-			border-top: solid lighten(@armazon-color-neutral, 20%) 1px;
-			color: @armazon-color-neutral;
-		}
-	}
-}
-
-// --------------------------------------------
-// Lists
-ol, ul {
-	padding: 0 0 0 @armazon-margin/2;
-	margin: 0 0 @armazon-margin @armazon-margin/2;
-
-	li {
-		padding: .1rem 0;
-	}
-}
-ul ul, ul ol, ol ol, ol ul {
-	margin: .5rem @armazon-margin/4;
-}
-dl {
-	dt dfn {
-		font-style: normal;
-	}
-	dt:before {
-		content: '\25b6\00a0';
-		display: inline-block;
-		vertical-align: middle;
-		color: @armazon-color-primary;
-		padding: 0 .25rem;
-		font-size: .9rem;
-	}
-	dd {
-		margin: 0;
-		padding: 0;
-		color: @armazon-color-neutral;
-	}
-}
 
 
-// --------------------------------------------
-// Typography
-body > * {
-	font-size: 1.4rem;
-	font-weight: 300;
-	text-shadow: 0 1px 0 #fff;
-}
-h1, h2, h3, h4, h5, h6 {
-	font-weight: 300;
-}
-h1 { font-size: 2.6rem; letter-spacing: -.1rem; }
-h2 { font-size: 2.2rem; letter-spacing: -.1rem; }
-h3 { font-size: 2.0rem; letter-spacing: -.1rem; }
-h4 { font-size: 1.8rem; }
-h5 { font-size: 1.6rem; }
-h6 { font-size: 1.4rem; }
-
-@media @non-mobile {
-	body > * {
-		font-size: 1.6rem;
-	}
-	h1, h2, h3, h4, h5, h6 {
-		font-weight: 300;
-	}
-	h1 { font-size: 3.2rem; letter-spacing: -.1rem; }
-	h2 { font-size: 2.8rem; letter-spacing: -.1rem; }
-	h3 { font-size: 2.4rem; letter-spacing: -.1rem; }
-	h4 { font-size: 2.0rem; }
-	h5 { font-size: 1.8rem; }
-	h6 { font-size: 1.6rem; }
-}
-
-
-// --------------------------------------------
-// Spacing
-button, .button, input, textarea, select, fieldset {
-	margin: 0 0 1rem 0;
-}
-h1, h2, h3, h4, h5, h6, p, pre {
-	margin: 0 0 (@armazon-margin/2) 0;
-}
-blockquote, figure, table, dl, form {
-	margin: 0 0 @armazon-margin 0;
-}
 
 // --------------------------------------------
 // Pseudo-elements
@@ -501,139 +142,6 @@ blockquote, figure, table, dl, form {
     text-shadow: none;
 }
 
-// --------------------------------------------
-// Grid
-.row, .bloque {
-	clear: both;
-	overflow: auto;
-	margin: 0 auto @armazon-margin/2 auto;
-	width: 100%;
-}
-[class^="column-"], [class^="columna-"] {
-	float: left;
-	width: 100%;
-	margin: 0 0 @armazon-margin/2 0;
-	.transition();
-}
-
-// less mixins to calculate the width and margin of the columns grid
-.calculate-width(@columns, @margin, @fraction:1) {
-	@v : (((100 - ((@columns - 1) * @margin)) / @columns) * @fraction) + ((@fraction - 1) * @margin);
-	@value : (floor(@v * 100)) / 100;
-	width: ~'@{value}%';
-}
-.calculate-offset(@columns, @margin, @fraction:1) {
-	@v : ((((100 - ((@columns - 1) * @margin)) / @columns) * @fraction) + ((@fraction - 1) * @margin)) + @margin;
-	@value : (floor(@v * 100)) / 100;
-	margin-left: ~'@{value}%';
-}
-
-@media @desktop {
-
-	[class^="column-"], [class^="columna-"] {
-		margin: 0 ~'@{armazon-columns-margin}%' 0 0;
-	}
-	[class^="column-"]:last-child,
-	[class^="columna-"]:last-child { margin-right: 0; }
-
-	.column-one-sixth,
-	.columna-un-sexto 		{ .calculate-width(6, @armazon-columns-margin, 1); }
-	.column-one-fourth,
-	.columna-un-cuarto 		{ .calculate-width(4, @armazon-columns-margin, 1); }
-	.column-one-third,
-	.columna-un-tercio 		{ .calculate-width(3, @armazon-columns-margin, 1); }
-	.column-one-half,
-	.columna-una-mitad 		{ .calculate-width(2, @armazon-columns-margin, 1); }
-	.column-two-thirds,
-	.columna-dos-tercios 	{ .calculate-width(3, @armazon-columns-margin, 2); }
-	.column-three-fourths,
-	.columna-tres-cuartos 	{ .calculate-width(4, @armazon-columns-margin, 3); }
-	.column-five-sixths,
-	.columna-cinco-sextos 	{ .calculate-width(6, @armazon-columns-margin, 5); }
-
-	.shift-one-sixth,
-	.desplaza-un-sexto 		{ .calculate-offset(6, @armazon-columns-margin, 1); }
-	.shift-one-fourth,
-	.desplaza-un-cuarto 	{ .calculate-offset(4, @armazon-columns-margin, 1); }
-	.shift-one-third,
-	.desplaza-un-tercio	 	{ .calculate-offset(3, @armazon-columns-margin, 1); }
-	.shift-one-half,
-	.desplaza-una-mitad 	{ .calculate-offset(2, @armazon-columns-margin, 1); }
-	.shift-two-thirds,
-	.desplaza-dos-tercios 	{ .calculate-offset(3, @armazon-columns-margin, 2); }
-	.shift-three-fourths,
-	.desplaza-tres-cuartos 	{ .calculate-offset(4, @armazon-columns-margin, 3); }
-	.shift-five-sixths,
-	.desplaza-cinco-sextos 	{ .calculate-offset(6, @armazon-columns-margin, 5); }
-}
-
-
-@media @tablet {
-
-	[class^="column-"], [class^="columna-"] {
-		margin: 0 ~'@{armazon-columns-tablet-margin}%' ~'@{armazon-columns-tablet-margin}%' 0;
-	}
-
-	// http://lea.verou.me/2011/01/styling-children-based-on-their-number-with-css3/
-	// -------------------
-	// 6 - six items
-	.row [class^="column-"]:first-child:nth-last-child(6),
-	.row [class^="column-"]:first-child:nth-last-child(6) ~ [class^="column-"],
-	.row [class^="columna-"]:first-child:nth-last-child(6),
-	.row [class^="columna-"]:first-child:nth-last-child(6) ~ [class^="columna-"] {
-		.calculate-width(3, @armazon-columns-tablet-margin, 1);
-		margin-bottom: @armazon-margin/2;
-	}
-	.row [class^="column-"]:first-child:nth-last-child(6) ~ [class^="column-"]:nth-child(3n),
-	.row [class^="columna-"]:first-child:nth-last-child(6) ~ [class^="columna-"]:nth-child(3n) {
-		margin-right: 0;
-	}
-
-	// -------------------
-	// 5 - five items
-	.row [class^="column-"]:first-child:nth-last-child(5),
-	.row [class^="column-"]:first-child:nth-last-child(5) ~ [class^="column-"],
-	.row [class^="columna-"]:first-child:nth-last-child(5),
-	.row [class^="columna-"]:first-child:nth-last-child(5) ~ [class^="columna-"] {
-		.calculate-width(2, @armazon-columns-tablet-margin, 1);
-		margin-bottom: @armazon-margin/2;
-	}
-	.row [class^="column-"]:first-child:nth-last-child(5) ~ [class^="column-"]:nth-child(2n),
-	.row [class^="columna-"]:first-child:nth-last-child(5) ~ [class^="columna-"]:nth-child(2n) {
-		margin-right: 0;
-	}
-	// last element will be 100%
-	.row [class^="column-"]:first-child:nth-last-child(5) ~ [class^="column-"]:nth-child(5),
-	.row [class^="columna-"]:first-child:nth-last-child(5) ~ [class^="columna-"]:nth-child(5) {
-		width: 100%;
-	}
-
-	// -------------------
-	// 4 - four items
-	.row [class^="column-"]:first-child:nth-last-child(4),
-	.row [class^="column-"]:first-child:nth-last-child(4) ~ [class^="column-"],
-	.row [class^="columna-"]:first-child:nth-last-child(4),
-	.row [class^="columna-"]:first-child:nth-last-child(4) ~ [class^="columna-"] {
-		.calculate-width(2, @armazon-columns-tablet-margin, 1);
-		margin-bottom: @armazon-margin/2;
-	}
-	.row [class^="column-"]:first-child:nth-last-child(4) ~ [class^="column-"]:nth-child(2n),
-	.row [class^="columna-"]:first-child:nth-last-child(4) ~ [class^="columna-"]:nth-child(2n) {
-		margin-right: 0;
-	}
-
-	// -------------------
-	// 3 or less : 100%
-	// -------------------
-}
-
-@media @non-mobile {
-	.row:after, .bloque:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
-}
 
 // --------------------------------------------
 // Utilities
@@ -651,3 +159,7 @@ blockquote, figure, table, dl, form {
 // --------------------------------------------
 // --------------------------------------------
 // Author's custom styles :
+
+@media @desktop {}
+@media @tablet {}
+@media @non-mobile {}

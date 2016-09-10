@@ -25,58 +25,48 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="apple-mobile-web-app-title" content="Area Top GitHub Users" />
 
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+
 	<!-- build:css frontend/app.min.css -->
 	<link rel="stylesheet" type="text/css" href="frontend/_src.armazon.css" />
 	<link rel="stylesheet" type="text/css" href="frontend/_src.app.css" />
 	<!-- endbuild -->
 </head>
-<body id="app">
+<body>
 
-<header>
-	<h1><strong>GitHub Top Users</strong> Area Ranking</h1>
-	<hr />
-</header>
+<div id="app">
+	<header>
+		<h1><i class="fa fa-github"></i> <strong>GitHub Top Users</strong> Area Ranking</h1>
+		<hr />
+	</header>
 
-<main>
-	<p v-if="data_error_loading">
-		error loading data.json file
-	</p>
-	<ol v-else>
-		<li v-for="(index, item) in data_items_parsed">
-			<h3 :data-rank="index | rank_num">
-				<strong>{{ item.name | ucwords }}</strong>
-				<a href="{{ item.url }}">@{{ item.login }}</a>
-			</h3>
-			<ul>
-				<li class="user-bio" v-if="item.has_user_bio">
-					{{ item.bio }}
-					<a href="{{ item.blog }}">{{ item.blog | nice_url }}</a>
-				</li>
-				<li class="user-location">
-					<strong v-if="item.company">{{ item.company }}. </strong>
-					{{ item.location }}
-				</li>
-			</ul>
-			<ul class="user-contribs">
-				<li><strong><em>Contributions:</em> {{ item.contributions }}</strong></li>
-			</ul>
-			<ul class="user-follow">
-				<li><em>Following:</em> {{ item.following }}</li>
-				<li><em>Followers:</em> {{ item.followers }}</li>
-			</ul>
-			<figure><img :src="item.avatar + '&amp;s=128'" :alt="item.name" /></figure>
-		</li>
-	</ol>
-</main>
+	<main>
+		<p v-if="data_error_loading">
+			Error loading: <code>data.json</code> file.
+		</p>
+		<ol id="user-list" v-else>
+			<li v-for="(index, item) in data_items_parsed">
+				<div class="user-data">
+					<h3 :data-rank="index | rank_num" :data-contributions="item.contributions"><strong>{{ item.name | ucwords }}</strong> <a href="{{ item.url }}"> &mdash; @{{ item.login }}</a></h3>
+					<ul>
+						<li class="user-bio" v-if="item.has_user_bio">{{ item.bio }} <a href="{{ item.blog }}"><i class="fa fa-globe"></i> {{ item.blog | nice_url }}</a></li>
+						<li class="user-location"><i class="fa fa-map-marker"></i> <strong v-if="item.company">{{ item.company }}. </strong> {{ item.location }}</li>
+					</ul>
+				</div>
+				<figure><img :src="item.avatar + '&amp;s=120'" :alt="item.name" /></figure>
+			</li>
+		</ol>
+	</main>
 
-<footer>
-	<hr />
-	<p>
-		<small>
-		<strong>@alterebro 2016</strong> &mdash; <a href="https://github.com/alterebro/area-top-github-users">github.com/alterebro/area-top-github-users</a>
-		</small>
-	</p>
-</footer>
+	<footer>
+		<hr />
+		<p>
+			<small>
+			<strong>@alterebro 2016</strong> &mdash; <a href="https://github.com/alterebro/area-top-github-users">github.com/alterebro/area-top-github-users</a>
+			</small>
+		</p>
+	</footer>
+</div>
 
 <!-- build:js frontend/app.min.js -->
 <script type="text/javascript" src="frontend/_src.vue.min.js"></script>
