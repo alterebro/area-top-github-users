@@ -37,6 +37,11 @@
 <div id="app">
 	<header>
 		<h1><i class="fa fa-github"></i> <strong>GitHub Top Users</strong> Area Ranking</h1>
+		<select>
+			<template v-for="(i, location) in data_json.locations">
+			<option :value="location">{{ data_json.labels[i] }}</option>
+			</template>
+		</select>
 		<hr />
 	</header>
 

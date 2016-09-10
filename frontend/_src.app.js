@@ -7,8 +7,9 @@ var data_file = 'data/data.json';
 var vd = {
 	data_error_loading : null,
 
-	data_folders : null,
-	data_locations : null,
+	data_json : null,
+//	data_folders : null,
+//	data_locations : null,
 	data_filedata : null,
 	data_items : null,
 	data_items_parsed : null
@@ -82,8 +83,9 @@ var vm = new Vue({
 						if (this.status >= 200 && this.status < 400) {
 							// Success
 							var res = JSON.parse(this.responseText);
-							self.data_folders = res.folders;
-							self.data_locations = res.locations;
+							self.data_json = res;
+							//self.data_folders = res.folders;
+							//self.data_locations = res.locations;
 							self.data_filedata = 'data/' + res.folders[0] + '/' + res.locations[0];
 							self.getItems();
 							self.data_error_loading = false;

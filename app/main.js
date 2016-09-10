@@ -51,6 +51,7 @@ function create_data_file() {
 		var data = {};
 			data['folders'] = folders;
 			data['locations'] = locations;
+			data['labels'] = the_labels;
 
 			console.log(data);
 			console.log(JSON.stringify(data));
@@ -282,6 +283,9 @@ function run() {
     // msg
     console.log( ' --- run() : ' + current_config['location'] + ' : ' + current_config['label']  + ' --- ' );
 
+	console.log( 'LABEL : ' + current_config['label'] );
+	the_labels.push( current_config['label'] );
+
     // ------
     var target_file = target_folder + current_config['location'] + '.json';
     if ( fs.existsSync(target_file) && skip_if_exists ) {
@@ -296,6 +300,8 @@ function run() {
         get_users( current_config );
     }
 }
+
+var the_labels = [];
 
 var error_users = [];
 var the_users = [];
