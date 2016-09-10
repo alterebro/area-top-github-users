@@ -27,7 +27,7 @@ var vm = new Vue({
 		rank_num : function(n) {
 			var out = n + 1;
 				out = ( out < 10 ) ? '0' + out : out;
-			return '#' + out + '. ';
+			return '#' + out + '';
 		},
 
 		nice_url : function(u) {

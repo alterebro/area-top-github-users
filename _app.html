@@ -45,6 +45,14 @@
 			Error loading: <code>data.json</code> file.
 		</p>
 		<ol id="user-list" v-else>
+
+			<li id="user-list-header">
+				<div class="user-data">
+					<h3 data-rank="Rank" data-contributions="Contrib.">Usuario</h3>
+				</div>
+				<figure><figcaption>Avatar</figcaption></figure>
+			</li>
+
 			<li v-for="(index, item) in data_items_parsed">
 				<div class="user-data">
 					<h3 :data-rank="index | rank_num" :data-contributions="item.contributions"><strong>{{ item.name | ucwords }}</strong> <a href="{{ item.url }}"> &mdash; @{{ item.login }}</a></h3>
@@ -53,7 +61,7 @@
 						<li class="user-location"><i class="fa fa-map-marker"></i> <strong v-if="item.company">{{ item.company }}. </strong> {{ item.location }}</li>
 					</ul>
 				</div>
-				<figure><img :src="item.avatar + '&amp;s=120'" :alt="item.name" /></figure>
+				<figure><img :src="item.avatar + '&amp;s=100'" :alt="item.name" /></figure>
 			</li>
 		</ol>
 	</main>
