@@ -1,7 +1,4 @@
 
-
-
-
 var data_file = 'data/data.json';
 
 var vd = {
@@ -9,7 +6,9 @@ var vd = {
 	data_json : null,
 	data_filedata : null,
 	data_items : null,
-	data_items_parsed : null
+	data_items_parsed : null,
+
+	current_location : null
 };
 
 var vm = new Vue({
@@ -75,8 +74,7 @@ var vm = new Vue({
 
 		getDataFile: function () {
 
-			var h = window.location.hash.substring(1);
-				h = ( !!h ) ? h + '.json' : h;
+			var h = window.location.hash.substring(1); // hash value
 
 			var self = this
 			var xhr = new XMLHttpRequest()
@@ -89,12 +87,9 @@ var vm = new Vue({
 							var res = JSON.parse(this.responseText);
 							self.data_json = res;
 
-							var json_file = res.locations[0];
-							if ( !!h && res.locations.indexOf(h) > -1 ) {
-								json_file = h;
-							}
-
-							self.data_filedata = 'data/' + res.folders[0] + '/' + json_file;
+							var json_file = ( !!h && res.locations.indexOf(h) > -1 ) ? h : res.locations[0];
+							self.current_location = json_file;
+							self.data_filedata = 'data/' + res.folders[0] + '/' + json_file + '.json';
 							self.getItems();
 							self.data_error_loading = false;
 

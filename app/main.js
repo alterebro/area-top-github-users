@@ -45,12 +45,11 @@ function create_data_file() {
 		folders.reverse();
 		folders = folders.slice(0, 2);
 
-	var locations = fs.readdirSync('./data/'+folders[0]);
-		locations = locations.filter(junk.not);
-
 	var labels = [];
+	var locations = [];
 		for (var i=0; i<config.length; i++) {
 			labels.push( config[i].label );
+			locations.push( config[i].location );
 		}
 
 		var data = {};
