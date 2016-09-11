@@ -6,10 +6,7 @@ var data_file = 'data/data.json';
 
 var vd = {
 	data_error_loading : null,
-
 	data_json : null,
-//	data_folders : null,
-//	data_locations : null,
 	data_filedata : null,
 	data_items : null,
 	data_items_parsed : null
@@ -45,6 +42,10 @@ var vm = new Vue({
 			return (str + '').replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function ($1) {
 				return $1.toUpperCase();
 			});
+		},
+
+		extensionless : function(s) {
+			return s.substring(0, s.lastIndexOf('.'));
 		}
 
 	},
@@ -74,6 +75,9 @@ var vm = new Vue({
 
 		getDataFile: function () {
 
+			var h = window.location.hash.substring(1);
+				h = ( !!h ) ? h + '.json' : h;
+
 			var self = this
 			var xhr = new XMLHttpRequest()
 				xhr.overrideMimeType("application/json");
@@ -84,9 +88,13 @@ var vm = new Vue({
 							// Success
 							var res = JSON.parse(this.responseText);
 							self.data_json = res;
-							//self.data_folders = res.folders;
-							//self.data_locations = res.locations;
-							self.data_filedata = 'data/' + res.folders[0] + '/' + res.locations[0];
+
+							var json_file = res.locations[0];
+							if ( !!h && res.locations.indexOf(h) > -1 ) {
+								json_file = h;
+							}
+
+							self.data_filedata = 'data/' + res.folders[0] + '/' + json_file;
 							self.getItems();
 							self.data_error_loading = false;
 
@@ -114,6 +122,12 @@ var vm = new Vue({
 				xhr.send();
 				xhr = null;
 
+		},
+
+		enroute: function() {
+			var selector = document.querySelector('#location-selector');
+			window.location.hash = selector.value;
+			this.getDataFile();
 		}
 
 	}
