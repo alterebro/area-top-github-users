@@ -41,17 +41,22 @@ function create_data_file() {
 	var folders = fs.readdirSync('./data');
 	    folders = folders.filter(junk.not);
 		folders = folders.filter(is_dir);
-		folders = folders.slice(0, 2);
 		folders.sort();
 		folders.reverse();
+		folders = folders.slice(0, 2);
 
-	var locations = fs.readdirSync('./data/'+folders[folders.length-1]);
+	var locations = fs.readdirSync('./data/'+folders[0]);
 		locations = locations.filter(junk.not);
+
+	var labels = [];
+		for (var i=0; i<config.length; i++) {
+			labels.push( config[i].label );
+		}
 
 		var data = {};
 			data['folders'] = folders;
 			data['locations'] = locations;
-			data['labels'] = the_labels;
+			data['labels'] = labels;
 
 			console.log(data);
 			console.log(JSON.stringify(data));
@@ -283,9 +288,6 @@ function run() {
     // msg
     console.log( ' --- run() : ' + current_config['location'] + ' : ' + current_config['label']  + ' --- ' );
 
-	console.log( 'LABEL : ' + current_config['label'] );
-	the_labels.push( current_config['label'] );
-
     // ------
     var target_file = target_folder + current_config['location'] + '.json';
     if ( fs.existsSync(target_file) && skip_if_exists ) {
@@ -300,8 +302,6 @@ function run() {
         get_users( current_config );
     }
 }
-
-var the_labels = [];
 
 var error_users = [];
 var the_users = [];
