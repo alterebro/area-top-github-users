@@ -314,4 +314,4 @@ var config = fs.readFileSync('./app/locations.json');
 
 var current_config = config[iterator];
 
-    run();
+	run();
