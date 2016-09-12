@@ -26,6 +26,24 @@ function date_id() {
     return output;
 }
 
+// Remove directory which is not empty
+// http://stackoverflow.com/a/32197381
+var rmdir_recursive = function(path) {
+	if( fs.existsSync(path) ) {
+		fs.readdirSync(path).forEach(function(file,index){
+			var curPath = path + "/" + file;
+			if(fs.lstatSync(curPath).isDirectory()) { // recurse
+				rmdir_recursive(curPath);
+			} else { // delete file
+				fs.unlinkSync(curPath);
+			}
+		});
+		fs.rmdirSync(path);
+	}
+};
+
+
+
 
 // ==============================================
 // ==============================================
@@ -43,7 +61,15 @@ function create_data_file() {
 		folders = folders.filter(is_dir);
 		folders.sort();
 		folders.reverse();
+
+	var remove_folders = folders.slice(2);
 		folders = folders.slice(0, 2);
+
+		// Keep only the last two data folders
+		for (var i=0; i<remove_folders.length; i++) {
+			console.log('./data/' + remove_folders[i]);
+			rmdir_recursive('./data/' + remove_folders[i]);
+		}
 
 	var labels = [];
 	var locations = [];
@@ -57,7 +83,7 @@ function create_data_file() {
 			data['locations'] = locations;
 			data['labels'] = labels;
 
-			console.log(data);
+			// console.log(data);
 			console.log(JSON.stringify(data));
 
 	fs.writeFileSync( './data/data.json', JSON.stringify(data), 'utf-8');
@@ -267,7 +293,6 @@ function export_data() {
 	// ELSE create the data/data.json file
     iterator++;
     if ( iterator < config.length ) { run(); }
-	else { create_data_file(); }
 }
 
 
@@ -286,6 +311,13 @@ function run() {
 
     // msg
     console.log( ' --- run() : ' + current_config['location'] + ' : ' + current_config['label']  + ' --- ' );
+	console.log( ' --> counter : iterator : ' + iterator + ' > config.length : ' + config.length );
+
+	// This is the END...
+	if ( iterator >= (config.length-1) ) {
+		create_data_file();
+		console.log( ' --> END' );
+	}
 
     // ------
     var target_file = target_folder + current_config['location'] + '.json';
@@ -300,6 +332,7 @@ function run() {
         // go!
         get_users( current_config );
     }
+
 }
 
 var error_users = [];
