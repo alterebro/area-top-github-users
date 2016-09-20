@@ -52,11 +52,12 @@ ol#user-list {
 
 	> li {
 		display: table-row;
+		border-bottom: dotted #ccc 1px;
 
 		div.user-data {
 			display: table-cell;
 			vertical-align: top;
-			padding: 0 0 2rem 0;
+			padding: 1rem 0 1.5rem 0;
 		}
 
 		figure {
@@ -64,7 +65,7 @@ ol#user-list {
 			vertical-align: top;
 			width: 70px;
 			height: 70px;
-			padding: 5px 0 2rem 0;
+			padding: 1.5rem 0 1.5rem;
 		}
 
 
@@ -75,18 +76,16 @@ ol#user-list {
 				line-height: 3rem;
 				font-size: 300;
 				padding: 0 40px 0 0;
-
 				white-space: nowrap;
 				width: 100%;
 				overflow: hidden;
 				text-overflow: ellipsis;
 
-				strong {
-					font-weight: 700;
-				}
-				a {
-					font-size: 95%;
-				}
+				strong { font-weight: 700; }
+				a { font-size: 95%; }
+			}
+			h3:before, h3:after {
+				font-weight: 700;
 			}
 			h3:before {
 				content: attr(data-rank);
@@ -105,6 +104,7 @@ ol#user-list {
 			}
 
 			ul {
+				position: relative;
 				padding: 0 60px 0 50px;
 				list-style: none;
 
@@ -114,6 +114,40 @@ ol#user-list {
 						font-weight: 700;
 					}
 				}
+			}
+
+			ul:before,
+			ul:after {
+				display: block;
+				position: absolute;
+				top: 0;
+				min-width: 30px;
+				text-align: center;
+				padding: .4rem .8rem;
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+				font-size: 1.2rem;
+				line-height: 1.3;
+				border-radius: 3px;
+				color: #fff;
+			}
+			ul:before { left: 0; }
+			ul:after { right: 0; }
+
+			ul.less-rank:before {
+				background: #c01048;
+				content: attr(data-rank-diff);
+			}
+			ul.more-rank:before {
+				background: #20c058;
+				content: "+" attr(data-rank-diff);
+			}
+			ul.less-contrib:after {
+				content: attr(data-contributions-diff);
+				background: #c01048;
+			}
+			ul.more-contrib:after {
+				content: "+" attr(data-contributions-diff);
+				background: #20c058;
 			}
 		}
 
@@ -128,7 +162,6 @@ ol#user-list {
 
 
 		&#user-list-header {
-
 			color: #999;
 
 			div.user-data {

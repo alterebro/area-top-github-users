@@ -81,7 +81,15 @@
 			<li v-for="(index, item) in data_items_parsed">
 				<div class="user-data">
 					<h3 :data-rank="index | rank_num" :data-contributions="item.contributions"><strong>{{ item.name | ucwords }}</strong> <a href="{{ item.url }}"> &mdash; @{{ item.login }}</a></h3>
-					<ul>
+					<ul
+						:data-contributions-diff="(item.contributions - item.prev.contributions) != 0 ? (item.contributions - item.prev.contributions) : null"
+						:data-rank-diff="(item.prev.order - item.order) != 0 ? (item.prev.order - item.order) : null"
+						v-bind:class="{
+							'less-contrib' : (item.contributions - item.prev.contributions) < 0,
+							'more-contrib' : (item.contributions - item.prev.contributions) > 0,
+							'less-rank' : (item.prev.order - item.order) < 0,
+							'more-rank' : (item.prev.order - item.order) > 0
+						}">
 						<li class="user-languages" v-if="item.languages.length > 0">
 							<span v-for="lang in item.languages" class="tag"> {{ lang }} </span>
 						</li>

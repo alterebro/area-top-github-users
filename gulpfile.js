@@ -15,7 +15,7 @@ gulp.task('build', function() {
 });
 gulp.task('compress', function() {
 	return 	gulp.src('index.html', {base: './'})
-			.pipe(htmlmin({ collapseWhitespace: true, removeComments: false }))
+			.pipe(htmlmin({ collapseWhitespace: true, removeComments: false, customAttrCollapse: /v-bind:class/ }))
 			.pipe(gulp.dest('./'));
 });
 

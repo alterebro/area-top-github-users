@@ -8,6 +8,10 @@ var vd = {
 	data_items : null,
 	data_items_parsed : null,
 
+	data_filedata_prev : null,
+	data_items_prev : null,
+	data_items_parsed_prev : null,
+
 	current_location : null
 };
 
@@ -46,21 +50,32 @@ var vm = new Vue({
 		extensionless : function(s) {
 			return s.substring(0, s.lastIndexOf('.'));
 		}
-
 	},
 
 	computed: {
 
+		data_items_parsed_prev : function() {
+
+			var output = [];
+			for ( var i=0; i<this.data_items_prev.length; i++ ) {
+				var item = this.data_items_prev[i];
+					item['order'] = i;
+				output.push( item );
+			}
+			return output;
+		},
+
 		data_items_parsed : function() {
 
 			var output = [];
-
 			for ( var i=0; i<50; i++ ) {
 			// for ( var i=0; i<this.data_items.length; i++ ) {
 
 				var item = this.data_items[i];
 					item['name'] = (!item['name']) ? item['login'] : item['name'];
 					item['has_user_bio'] = ( !!item['bio'] || !!item['blog'] );
+					item['order'] = i;
+					item['prev'] = this.data_items_parsed_prev.filter(function(a){ return a.id == item['id'] })[0];
 
 				output.push( item );
 			}
@@ -89,8 +104,17 @@ var vm = new Vue({
 
 							var json_file = ( !!h && res.locations.indexOf(h) > -1 ) ? h : res.locations[0];
 							self.current_location = json_file;
-							self.data_filedata = 'data/' + res.folders[0] + '/' + json_file + '.json';
-							self.getItems();
+
+							var file_previous = ( res.folders.length > 1 )
+								? 'data/' + res.folders[1] + '/' + json_file + '.json'
+								: false;
+							self.data_filedata_prev = file_previous;
+							self.getItems( file_previous, 'data_items_prev' );
+
+							var file_current = 'data/' + res.folders[0] + '/' + json_file + '.json';
+							self.data_filedata = file_current;
+							self.getItems( file_current, 'data_items' );
+
 							self.data_error_loading = false;
 
 						} else {
@@ -103,15 +127,15 @@ var vm = new Vue({
 				xhr.send();
 				xhr = null;
 		},
-		getItems: function() {
+		getItems: function( source, target ) {
 
 			var self = this;
 			var xhr = new XMLHttpRequest();
 				xhr.overrideMimeType("application/json");
-				xhr.open('GET', this.data_filedata, true);
+				xhr.open('GET', source, true);
 				xhr.onload = function () {
 
-					self.data_items = JSON.parse(this.responseText);
+					self[target] = JSON.parse(this.responseText);
 
 				}
 				xhr.send();
