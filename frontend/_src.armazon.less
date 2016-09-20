@@ -13,7 +13,7 @@
 
 @armazon-color-background 		: #fff;	// Global Background Color
 @armazon-color-foreground 		: #333; 	// Global Foreground & Text Color
-@armazon-color-primary 			: #42b983; 	// Links and Buttons Color
+@armazon-color-primary 			: #4078c0; 	// Links and Buttons Color
 @armazon-color-neutral 			: #a0a0a0; 	// Neutral Grey
 
 // --------------------------------------------
@@ -196,3 +196,19 @@ select:focus {
 @media @desktop {}
 @media @tablet {}
 @media @non-mobile {}
+
+li.user-languages {
+	padding: 0 0 .5rem 0;
+	.tag {
+		display: inline-block;
+		text-transform: uppercase;
+		background: @armazon-color-primary;
+		color: @armazon-color-background;
+		text-shadow: 0 -2px 0 rgba(0, 0, 0, .25);
+		font-size: 1rem;
+		line-height: 1.3;
+		padding: .4rem .8rem;
+		margin: 0 .25rem 0 0;
+		border-radius: 3px;
+	}
+}

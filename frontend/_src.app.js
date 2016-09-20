@@ -55,7 +55,7 @@ var vm = new Vue({
 
 			var output = [];
 
-			for ( var i=0; i<25; i++ ) {
+			for ( var i=0; i<50; i++ ) {
 			// for ( var i=0; i<this.data_items.length; i++ ) {
 
 				var item = this.data_items[i];
