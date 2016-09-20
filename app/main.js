@@ -184,22 +184,40 @@ function get_user_details() {
                 user['followers']       = false;
                 user['following']       = false;
                 user['contributions']   = false;
+				user['repositories'] 	= false;
+				user['languages'] 		= false;
 
                 if (res) {
 
-                    var $ = cheerio.load( res.text );
-                    user['name'] = $('h1 div.vcard-fullname').text();
-                    user['company'] = $('ul.vcard-details li[itemprop="worksFor"]').text();
-                    user['location'] = $('ul.vcard-details li[itemprop="homeLocation"]').text();
-                    user['blog'] = $('ul.vcard-details li[itemprop="url"] a').attr('href') || ''; // TODO: check if it is a valid URL
-                    user['bio'] = $('div.user-profile-bio').text();
-                    user['followers'] = parseInt($('div.vcard-stats a.vcard-stat:nth-child(1) strong.vcard-stat-count').text().trim());
-                    user['following'] = parseInt($('div.vcard-stats a.vcard-stat:nth-child(3) strong.vcard-stat-count').text().trim());
+					var $ = cheerio.load( res.text );
+	                user['name'] = $('.vcard-fullname[itemprop="name"]').text();
+	                user['company'] = $('ul.vcard-details li[itemprop="worksFor"]').text();
+	                user['location'] = $('ul.vcard-details li[itemprop="homeLocation"]').text();
+	                user['blog'] = $('ul.vcard-details li[itemprop="url"] a').attr('href') || ''; // TODO: check if it is a valid URL
+	                user['bio'] = $('div.user-profile-bio').text();
 
-                    var contributions = $('div.flush:nth-child(2) h3').text().trim();
-                        contributions = contributions.split(' ')[0];
-                        contributions = parseInt(contributions.replace(',', ''));
-                    user['contributions'] = contributions;
+					user['followers'] = parseInt( $('div.user-profile-nav a[href$="followers"] span.counter').text().trim() );
+					user['following'] = parseInt( $('div.user-profile-nav a[href$="following"] span.counter').text().trim() );
+
+					var contributions = $('div.js-contribution-graph h2:first-child').text().trim();
+						contributions = contributions.split(' ')[0];
+						contributions = parseInt(contributions.trim().replace(',', ''));
+					user['contributions'] = contributions;
+
+					user['repositories'] = parseInt( $('div.user-profile-nav a[href$="repositories"] span.counter').text().trim() );
+
+					var languages = [];
+					$('ol.pinned-repos-list li p.f6').each(function(i, el){
+						var lang = $(this).text();
+							lang = lang.replace(/([0-9]+),([0-9]+)/, '$1$2');
+							lang = lang.replace(/\d+/g, '').trim();
+
+						if ( lang != '' && languages.indexOf(lang) < 0 ) {
+							languages.push( lang );
+						}
+
+					});
+					user['languages'] = languages;
 
                 } else {
 
