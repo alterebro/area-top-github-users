@@ -88,18 +88,14 @@ function create_data_file() {
 			rmdir_recursive('./data/' + remove_folders[i]);
 		}
 
-	/*
-	var labels = [];
 	var locations = [];
 		for (var i=0; i<config.length; i++) {
-			labels.push( config[i].label );
 			locations.push( config[i].location );
 		}
-	*/
+
 		var data = {};
 			data['folders'] = folders;
-			// data['locations'] = locations;
-			// data['labels'] = labels;
+			data['locations'] = locations;
 
 		var all_languages = {};
 		var all_users = 0;
