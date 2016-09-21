@@ -59,9 +59,10 @@
 		<h1><i class="fa fa-github"></i> <strong>GitHub Top Users</strong> Area Ranking</h1>
 
 		<select id="location-selector" v-if="data_json.locations.length > 1" v-on:change="enroute()" v-model="current_location">
-			<template v-for="(i, location) in data_json.locations">
-			<option :value="location">{{ data_json.labels[i] }}</option>
-			</template>
+			<option value="">Global</option>
+			<optgroup label="Locations">
+				<option v-for="(i, location) in data_json.locations" :value="location">{{ data_json.labels[i] }}</option>
+			</optgroup>
 		</select>
 		<hr />
 	</header>

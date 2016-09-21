@@ -42,7 +42,24 @@ var rmdir_recursive = function(path) {
 	}
 };
 
-
+// Sort an Object
+// http://jsfiddle.net/lalatino/mcuzr/
+function sortObject(obj) {
+    var arr = [];
+    var prop;
+    for (prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            arr.push({
+                'lang': prop,
+                'n': obj[prop]
+            });
+        }
+    }
+    arr.sort(function(a, b) {
+        return b.n - a.n;
+    });
+    return arr; // returns array
+}
 
 
 // ==============================================
@@ -83,8 +100,57 @@ function create_data_file() {
 			data['locations'] = locations;
 			data['labels'] = labels;
 
-			// console.log(data);
-			console.log(JSON.stringify(data));
+		var all_languages = {};
+		var all_users = 0;
+		var top_users = [];
+
+		data['items'] = [];
+		for ( var i=0; i<config.length; i++ ) {
+
+			var item_data_file = './data/' + folders[0] + '/' + config[i].location + '.json';
+			var item_data = fs.readFileSync(item_data_file);
+			    item_data = JSON.parse(item_data);
+
+			var item_data_langs = {};
+				for ( var j=0; j<item_data.length; j++ ) {
+
+					for (var k=0; k<item_data[j]['languages'].length; k++) {
+						// location languages
+						if ( item_data_langs.hasOwnProperty( item_data[j]['languages'][k] ) ) { item_data_langs[item_data[j]['languages'][k]]++; }
+						else { item_data_langs[item_data[j]['languages'][k]] = 1; }
+
+						// all languages
+						if ( all_languages.hasOwnProperty( item_data[j]['languages'][k] ) ) { all_languages[item_data[j]['languages'][k]]++; }
+						else { all_languages[item_data[j]['languages'][k]] = 1; }
+					}
+
+					// Push the top 'n' users for every location
+					if (j<25) {
+						top_users.push(item_data[j]);
+					}
+				}
+			var item_data_langs_sorted = sortObject( item_data_langs );
+				item_data_langs_sorted = item_data_langs_sorted.slice(0, 5);
+
+			data['items'][i] = {
+				'label' : config[i].label,
+				'location' : config[i].location,
+				'users' : item_data.length,
+				'languages' : item_data_langs_sorted
+			}
+
+			all_users += item_data.length;
+		}
+
+		data['all_languages'] = sortObject( all_languages ).slice(0, 10);
+		data['all_users'] = all_users;
+
+		top_users = top_users.sort(function(a,b) { return b.contributions - a.contributions; });
+		top_users = top_users.slice(0, 10); // TOP n
+		data['top_users'] = top_users;
+
+		// console.log( data );
+		// console.log( JSON.stringify(data) );
 
 	fs.writeFileSync( './data/data.json', JSON.stringify(data), 'utf-8');
 }

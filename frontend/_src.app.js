@@ -67,15 +67,24 @@ var vm = new Vue({
 
 		data_items_parsed : function() {
 
+			var has_prev = !!this.data_items_parsed_prev;
 			var output = [];
-			for ( var i=0; i<50; i++ ) {
-			// for ( var i=0; i<this.data_items.length; i++ ) {
+
+			for ( var i=0; i<this.data_items.length; i++ ) {
+
+				// Limit show to n users
+				if ( i >= 50 ) { break; }
 
 				var item = this.data_items[i];
+
 					item['name'] = (!item['name']) ? item['login'] : item['name'];
 					item['has_user_bio'] = ( !!item['bio'] || !!item['blog'] );
 					item['order'] = i;
-					item['prev'] = this.data_items_parsed_prev.filter(function(a){ return a.id == item['id'] })[0];
+
+					if (has_prev) {
+						item['prev'] = this.data_items_parsed_prev.filter(function(a){ return a.id == item['id'] })[0];
+						// (http://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects/35398031#35398031)
+					}
 
 				output.push( item );
 			}
@@ -102,18 +111,28 @@ var vm = new Vue({
 							var res = JSON.parse(this.responseText);
 							self.data_json = res;
 
-							var json_file = ( !!h && res.locations.indexOf(h) > -1 ) ? h : res.locations[0];
-							self.current_location = json_file;
+							if ( res.items.length > 1 && (!h || res.locations.indexOf(h) == -1 ) ) {
 
-							var file_previous = ( res.folders.length > 1 )
-								? 'data/' + res.folders[1] + '/' + json_file + '.json'
-								: false;
-							self.data_filedata_prev = file_previous;
-							self.getItems( file_previous, 'data_items_prev' );
+								self.data_items = res.top_users;
+								self.data_items_prev = null;
+								self.current_location = '';
 
-							var file_current = 'data/' + res.folders[0] + '/' + json_file + '.json';
-							self.data_filedata = file_current;
-							self.getItems( file_current, 'data_items' );
+							} else {
+
+								var json_file = ( !!h && res.locations.indexOf(h) > -1 ) ? h : res.locations[0];
+								self.current_location = json_file;
+
+								var file_previous = ( res.folders.length > 1 )
+									? 'data/' + res.folders[1] + '/' + json_file + '.json'
+									: false;
+								self.data_filedata_prev = file_previous;
+								self.getItems( file_previous, 'data_items_prev' );
+
+								var file_current = 'data/' + res.folders[0] + '/' + json_file + '.json';
+								self.data_filedata = file_current;
+								self.getItems( file_current, 'data_items' );
+
+							}
 
 							self.data_error_loading = false;
 
