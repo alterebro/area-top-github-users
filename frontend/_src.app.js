@@ -12,7 +12,8 @@ var vd = {
 	data_items_prev : null,
 	data_items_parsed_prev : null,
 
-	current_location : null
+	current_location : null,
+	has_index : null
 };
 
 var vm = new Vue({
@@ -89,6 +90,11 @@ var vm = new Vue({
 				output.push( item );
 			}
 			return output;
+		},
+
+		has_index : function() {
+
+			return this.current_location == '' && this.data_items.length > 1;
 
 		}
 

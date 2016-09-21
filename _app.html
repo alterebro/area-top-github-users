@@ -58,20 +58,31 @@
 	<header>
 		<h1><i class="fa fa-github"></i> <strong>GitHub Top Users</strong> Area Ranking</h1>
 
-		<select id="location-selector" v-if="data_json.locations.length > 1" v-on:change="enroute()" v-model="current_location">
+		<select id="location-selector" v-if="data_json.items.length > 1" v-on:change="enroute()" v-model="current_location">
 			<option value="">Global</option>
 			<optgroup label="Locations">
-				<option v-for="(i, location) in data_json.locations" :value="location">{{ data_json.labels[i] }}</option>
+				<option v-for="loc in data_json.items" :value="loc.location">{{ loc.label }}<option>
 			</optgroup>
 		</select>
 		<hr />
 	</header>
 
-	<main>
-		<p v-if="data_error_loading">
+	<main v-if="data_error_loading">
+		<p>
 			Error loading: <code>data.json</code> file.
 		</p>
-		<ol id="user-list" v-else>
+	</main>
+	<main v-else>
+
+		<div v-if="has_index">
+			<p>
+				<strong>This is the index content.</strong>
+				<br />Folders: <code>{{ data_json.folders }}</code>
+			</p>
+			<hr />
+		</div>
+
+		<ol id="user-list">
 			<li id="user-list-header">
 				<div class="user-data">
 					<h3 data-rank="Rank" data-contributions="Contrib.">Usuario</h3>
