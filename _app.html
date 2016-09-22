@@ -60,9 +60,9 @@
 
 		<select id="location-selector" v-if="data_json.items.length > 1" v-on:change="enroute()" v-model="current_location">
 			<option value="">Global</option>
-			<optgroup label="Locations">
-				<option v-for="loc in data_json.items" :value="loc.location">{{ loc.label }}<option>
-			</optgroup>
+			<!-- optgroup label="Locations" -->
+				<option v-for="loc in data_json.items" :value="loc.location"> &ndash; {{ loc.label }}<option>
+			<!-- /optgroup -->
 		</select>
 		<hr />
 	</header>
@@ -73,13 +73,29 @@
 		</p>
 	</main>
 	<main v-else>
+		<div v-if="has_index" class="index">
+			<h3>Most Used Programming Languages Globally</h3>
+			<ul class="langs-global">
+				<li v-for="lang in data_json.all_languages" :data-percent="lang.n | lang_percent data_json.all_users">
+					<span>{{ lang.lang }}</span>
+					<em style="height: {{ lang.n*1.7 | lang_percent data_json.all_users }}%; background-color: {{ lang.lang | str_to_color }}"></em>
+				</li>
+			</ul>
 
-		<div v-if="has_index">
-			<p>
-				<strong>This is the index content.</strong>
-				<br />Folders: <code>{{ data_json.folders }}</code>
-			</p>
-			<hr />
+			<h3>Most Used languages by location:</h3>
+			<ul class="langs-local">
+				<li v-for="loc in data_json.items">
+					<strong>{{ loc.label }}</strong>
+					<ul>
+						<li v-for="lang in loc.languages" :data-percent="lang.n | lang_percent loc.users">
+							<span>{{ lang.lang }}</span>
+							<em style="width: {{ lang.n | lang_percent loc.users }}%; background-color: {{ lang.lang | str_to_color }}"></em>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<h3>Top 10 Global Area Users</h3>
 		</div>
 
 		<ol id="user-list">

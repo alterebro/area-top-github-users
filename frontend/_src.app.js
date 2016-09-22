@@ -50,6 +50,16 @@ var vm = new Vue({
 
 		extensionless : function(s) {
 			return s.substring(0, s.lastIndexOf('.'));
+		},
+
+		lang_percent : function(n, t) {
+			// return (n * 100 / t).toFixed(2) ;
+			return Math.round(n * 100 / t);
+		},
+
+		str_to_color : function(s) {
+			var c = str2color(s);
+			return c.hex;
 		}
 	},
 
@@ -93,9 +103,7 @@ var vm = new Vue({
 		},
 
 		has_index : function() {
-
-			return this.current_location == '' && this.data_items.length > 1;
-
+			return (this.current_location == '' && this.data_items.length > 1);
 		}
 
 	},
@@ -177,3 +185,68 @@ var vm = new Vue({
 	}
 
 });
+
+
+// PHP str_replace mimic
+function str_replace(find, replace, str){
+	return str.replace(new RegExp("(" + find.map(function(i){return i.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&")}).join("|") + ")", "g"), function(s){ return replace[find.indexOf(s)]});
+}
+
+function str2color(str) {
+
+	// Based on Tim Pietrusky's randomstringtocsscolor
+	// https://github.com/TimPietrusky/randomstringtocsscolor
+
+	// Make the string a bit more hex'ish
+	str = str.toLowerCase();
+	var find = 		['g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v'];
+	var replace = 	['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+	str = str_replace(find, replace, str);
+
+	var value = str.split('');
+	var result = '';
+
+	for (var i = 0; i < value.length; i++) {
+		var val = value[i];
+		if (!/^[0-9A-F]{1}$/i.test(val)) {
+			val = 0;
+		}
+		result += val;
+	}
+
+    if (result.length % 3) {
+		result += Array((3 - result.length % 3) + 1).join("0");
+    }
+
+	// Split in 3 groups with equal size
+    var regexp = new RegExp("([A-Z0-9]{"+result.length / 3+"})", "i");
+    result = result.split(regexp);
+
+    // Remove first 0 (if there is one at first postion of every group
+	if (result[1].length > 2) {
+		if (result[1].charAt(0) == result[3].charAt(0) == result[5].charAt(0) == 0) {
+			result[1] = result[1].substr(1);
+			result[3] = result[3].substr(1);
+			result[5] = result[5].substr(1);
+		}
+    }
+
+	// Truncate (first 2 chars stay, the rest gets deleted)
+	result[1] = result[1].slice(0, 2);
+	result[3] = result[3].slice(0, 2);
+	result[5] = result[5].slice(0, 2);
+
+	// Add element if color consists of just 1 char per color
+	if (result[1].length == 1) {
+		result[1] += result[1];
+		result[3] += result[3];
+		result[5] += result[5];
+	}
+
+	return {
+		'hex' : '#' + result[1] + result[3] + result[5],
+		'red' : parseInt(result[1], 16),
+		'green' : parseInt(result[3], 16),
+		'blue' : parseInt(result[5], 16)
+	};
+}

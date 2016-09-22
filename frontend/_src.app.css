@@ -198,3 +198,107 @@ ol#user-list > li#user-list-header figure figcaption {
   text-align: center;
   margin: 0 0 0 20px;
 }
+.index h3 {
+  margin: 0 0 1rem 0;
+}
+.index h3:before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+  background: #4078c0;
+  margin: 0 .75rem 0 0;
+}
+.index ul {
+  list-style: none;
+  margin: 0 0 2rem;
+}
+.index ul li {
+  font-size: 1rem;
+}
+.index ul li span {
+  text-transform: uppercase;
+  display: block;
+}
+.index ul li em {
+  display: block;
+  position: absolute;
+  margin: 1px 0;
+  border-radius: 2px;
+  filter: saturate(120%) brightness(80%);
+}
+.index ul.langs-global {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.index ul.langs-global li {
+  width: 9.2%;
+  position: relative;
+  height: 80px;
+}
+.index ul.langs-global li span {
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+.index ul.langs-global li em {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+.index ul.langs-global li:after {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  content: attr(data-percent) "%";
+  display: block;
+  float: right;
+  padding: 0 .25rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+.index ul.langs-local {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.index ul.langs-local:after {
+  content: "";
+  flex: 0 59%;
+  margin: 0 0 10px;
+  border: solid transparent 10px;
+}
+.index ul.langs-local > li {
+  width: 18%;
+  margin: 0 0 10px;
+}
+.index ul.langs-local > li strong {
+  display: block;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.3rem;
+}
+.index ul.langs-local > li ul li {
+  height: 1.8rem;
+  line-height: 1.8rem;
+  position: relative;
+}
+.index ul.langs-local > li ul li em {
+  top: 0;
+  right: 0;
+  height: 16px;
+  min-width: 2.5rem;
+}
+.index ul.langs-local > li ul li:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: attr(data-percent) "%";
+  display: block;
+  float: right;
+  padding: 0 .25rem;
+  color: rgba(255, 255, 255, 0.8);
+}
