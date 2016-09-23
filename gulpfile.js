@@ -4,6 +4,7 @@ var gulp 		= require('gulp'),
 	useref 		= require('gulp-useref'),
 	gulpIf 		= require('gulp-if'),
 	uglify 		= require('gulp-uglify'),
+	cleanCSS 	= require('gulp-clean-css'),
 	sequence 	= require('gulp-sequence');
 
 gulp.task('build', function() {
@@ -11,6 +12,7 @@ gulp.task('build', function() {
 				.pipe(rename("index.html"))
 				.pipe(useref())
 				.pipe(gulpIf('*.js', uglify()))
+				.pipe(gulpIf('*.css', cleanCSS()))
 				.pipe(gulp.dest("./"));
 });
 gulp.task('compress', function() {
