@@ -226,7 +226,6 @@ ol#user-list > li#user-list-header figure figcaption {
   position: absolute;
   margin: 1px 0;
   border-radius: 2px;
-  filter: saturate(120%) brightness(80%);
 }
 .index ul.langs-global {
   display: flex;
@@ -239,6 +238,7 @@ ol#user-list > li#user-list-header figure figcaption {
   height: 80px;
 }
 .index ul.langs-global li span {
+  text-align: center;
   width: 100%;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -249,14 +249,14 @@ ol#user-list > li#user-list-header figure figcaption {
   width: 100%;
 }
 .index ul.langs-global li:after {
-  position: absolute;
   bottom: 0;
+  display: block;
+  position: absolute;
   right: 0;
   content: attr(data-percent) "%";
-  display: block;
   float: right;
   padding: 0 .25rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
 }
 .index ul.langs-local {
   display: flex;
@@ -293,12 +293,12 @@ ol#user-list > li#user-list-header figure figcaption {
   min-width: 2.5rem;
 }
 .index ul.langs-local > li ul li:after {
+  display: block;
   position: absolute;
-  top: 0;
   right: 0;
   content: attr(data-percent) "%";
-  display: block;
   float: right;
   padding: 0 .25rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
+  top: 0;
 }

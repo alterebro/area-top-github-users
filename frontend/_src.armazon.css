@@ -183,7 +183,7 @@ li.user-languages .tag {
   text-transform: uppercase;
   background: #4078c0;
   color: #ffffff;
-  text-shadow: 0 -2px 0 rgba(0, 0, 0, 0.25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
   font-size: 1rem;
   line-height: 1.3;
   padding: .4rem .8rem;

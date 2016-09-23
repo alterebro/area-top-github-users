@@ -119,7 +119,7 @@
 							'more-rank' : (item.prev.order - item.order) > 0
 						}">
 						<li class="user-languages" v-if="item.languages.length > 0">
-							<span v-for="lang in item.languages" class="tag"> {{ lang }} </span>
+							<span v-for="lang in item.languages" class="tag" style="background-color: {{ lang | str_to_color }}"> {{ lang }} </span>
 						</li>
 						<li class="user-bio" v-if="item.has_user_bio">{{ item.bio }} <a href="{{ item.blog }}"><i class="fa fa-globe"></i> {{ item.blog | nice_url }}</a></li>
 						<li class="user-location"><i class="fa fa-map-marker"></i> <strong v-if="item.company">{{ item.company }}. </strong> {{ item.location }}</li>

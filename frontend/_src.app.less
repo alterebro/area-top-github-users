@@ -226,7 +226,6 @@ ol#user-list {
 				position: absolute;
 				margin: 1px 0;
 				border-radius: 2px;
-				filter: saturate(120%) brightness(80%);
 			}
 		}
 	}
@@ -242,7 +241,7 @@ ol#user-list {
 			height: 80px;
 
 			span {
-				// text-align: center;
+				text-align: center;
 				width: 100%;
 				overflow-x: hidden;
 				text-overflow: ellipsis;
@@ -252,20 +251,10 @@ ol#user-list {
 				right: 0;
 				width: 100%;
 			}
-
 			&:after {
-				display: block;
-				position: absolute;
-					bottom: 0;
-				right: 0;
-				content: attr(data-percent) "%";
-				display: block;
-				float: right;
-				padding: 0 .25rem;
-				color: rgba(255, 255, 255, .8);
+				bottom: 0;
+				.after-text();
 			}
-
-
 		}
 	}
 
@@ -307,15 +296,8 @@ ol#user-list {
 						min-width: 2.5rem;
 					}
 					&:after {
-						display: block;
-						position: absolute;
+						.after-text();
 						top: 0;
-						right: 0;
-						content: attr(data-percent) "%";
-						display: block;
-						float: right;
-						padding: 0 .25rem;
-						color: rgba(255, 255, 255, .8);
 					}
 				}
 			}
@@ -323,4 +305,14 @@ ol#user-list {
 
 	}
 
+}
+
+.after-text() {
+	display: block;
+	position: absolute;
+	right: 0;
+	content: attr(data-percent) "%";
+	float: right;
+	padding: 0 .25rem;
+	color: #fff;
 }

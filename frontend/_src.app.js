@@ -58,8 +58,8 @@ var vm = new Vue({
 		},
 
 		str_to_color : function(s) {
-			var c = str2color(s);
-			return c.hex;
+
+			return str_fnv1a_color(s);
 		}
 	},
 
@@ -187,66 +187,35 @@ var vm = new Vue({
 });
 
 
-// PHP str_replace mimic
-function str_replace(find, replace, str){
-	return str.replace(new RegExp("(" + find.map(function(i){return i.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&")}).join("|") + ")", "g"), function(s){ return replace[find.indexOf(s)]});
-}
 
-function str2color(str) {
+function str_fnv1a_color(str) {
+	// FNV-1a implementation based on:
+	// https://gist.github.com/vaiorabbit/5657561
+    var i, l,
+        hval = 0x811c9dc5;
+    for (i = 0, l = str.length; i < l; i++) {
+        hval ^= str.charCodeAt(i);
+        hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24);
+    }
+	// return '#' + ("00000" + (hval >>> 0).toString(16)).slice(-6);
 
-	// Based on Tim Pietrusky's randomstringtocsscolor
-	// https://github.com/TimPietrusky/randomstringtocsscolor
-
-	// Make the string a bit more hex'ish
-	str = str.toLowerCase();
-	var find = 		['g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v'];
-	var replace = 	['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
-	str = str_replace(find, replace, str);
-
-	var value = str.split('');
-	var result = '';
-
-	for (var i = 0; i < value.length; i++) {
-		var val = value[i];
-		if (!/^[0-9A-F]{1}$/i.test(val)) {
-			val = 0;
-		}
-		result += val;
+	// ------
+	// modify color
+	function _num(num, add) {
+		num = num + add;
+		num = ( num > 255 ) ? 255 : num;
+		num = ( num < 0 ) ? 0 : num;
+		return ('00' + (num.toString(16))).slice(-2);
 	}
 
-    if (result.length % 3) {
-		result += Array((3 - result.length % 3) + 1).join("0");
-    }
+	var hex = ("00000" + (hval >>> 0).toString(16)).slice(-6);
+	var r = parseInt(hex.substr(0,2), 16);
+	var g = parseInt(hex.substr(2,2), 16);
+	var b = parseInt(hex.substr(4,2), 16);
 
-	// Split in 3 groups with equal size
-    var regexp = new RegExp("([A-Z0-9]{"+result.length / 3+"})", "i");
-    result = result.split(regexp);
+	r = _num(r, -64);
+	g = _num(g, -32);
+	b = _num(b, 48);
 
-    // Remove first 0 (if there is one at first postion of every group
-	if (result[1].length > 2) {
-		if (result[1].charAt(0) == result[3].charAt(0) == result[5].charAt(0) == 0) {
-			result[1] = result[1].substr(1);
-			result[3] = result[3].substr(1);
-			result[5] = result[5].substr(1);
-		}
-    }
-
-	// Truncate (first 2 chars stay, the rest gets deleted)
-	result[1] = result[1].slice(0, 2);
-	result[3] = result[3].slice(0, 2);
-	result[5] = result[5].slice(0, 2);
-
-	// Add element if color consists of just 1 char per color
-	if (result[1].length == 1) {
-		result[1] += result[1];
-		result[3] += result[3];
-		result[5] += result[5];
-	}
-
-	return {
-		'hex' : '#' + result[1] + result[3] + result[5],
-		'red' : parseInt(result[1], 16),
-		'green' : parseInt(result[3], 16),
-		'blue' : parseInt(result[5], 16)
-	};
+	return '#' + r + g + b;
 }
