@@ -70,6 +70,9 @@ ol#user-list > li {
   display: table-row;
   border-bottom: dotted #ccc 1px;
 }
+ol#user-list > li:last-child {
+  border-bottom: none;
+}
 ol#user-list > li div.user-data {
   display: table-cell;
   vertical-align: top;
@@ -197,6 +200,23 @@ ol#user-list > li#user-list-header figure figcaption {
   text-transform: uppercase;
   text-align: center;
   margin: 0 0 0 20px;
+}
+main h2 {
+  margin: 0 0 1rem 0;
+  padding: 0;
+}
+main h2 strong {
+  font-weight: 400;
+}
+main h2:before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+  background: #4078c0;
+  margin: 0 .25rem 0 0;
+  vertical-align: middle;
 }
 .index h3 {
   margin: 0 0 1rem 0;

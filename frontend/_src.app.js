@@ -13,6 +13,7 @@ var vd = {
 	data_items_parsed_prev : null,
 
 	current_location : null,
+	current_label : null,
 	has_index : null
 };
 
@@ -60,6 +61,15 @@ var vm = new Vue({
 		str_to_color : function(s) {
 
 			return str_fnv1a_color(s);
+		},
+
+		format_date : function(str) {
+
+			if ( str !== undefined ) {
+				str = str.toString();
+				var chunks = str.match(/.{1,2}/g);
+				return chunks[2] + '.' + chunks[1] + '.' + (parseInt(chunks[0]) + 2000);
+			}
 		}
 	},
 
@@ -100,6 +110,14 @@ var vm = new Vue({
 				output.push( item );
 			}
 			return output;
+		},
+
+		current_label : function() {
+
+			var self = this;
+			var a = this.data_json.items.filter( function(a){ return a.location == self.current_location; })[0];
+			return (a === undefined) ? 'Global' : a.label;
+
 		},
 
 		has_index : function() {

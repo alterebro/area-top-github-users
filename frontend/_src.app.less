@@ -54,6 +54,10 @@ ol#user-list {
 		display: table-row;
 		border-bottom: dotted #ccc 1px;
 
+		&:last-child {
+			border-bottom: none;
+		}
+
 		div.user-data {
 			display: table-cell;
 			vertical-align: top;
@@ -194,6 +198,23 @@ ol#user-list {
 	}
 }
 
+
+main h2 {
+	margin: 0 0 1rem 0;
+	padding: 0;
+
+	strong { font-weight: 400; }
+	&:before {
+		content: '';
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		border-radius: 3px;
+		background: #4078c0;
+		margin: 0 .25rem 0 0;
+		vertical-align: middle;
+	}
+}
 
 .index {
 
