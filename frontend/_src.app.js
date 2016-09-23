@@ -177,9 +177,12 @@ var vm = new Vue({
 		},
 
 		enroute: function() {
+
+			var from_select = !( arguments.length == 1 && arguments[0] === 0 );
 			var selector = document.querySelector('#location-selector');
-			window.location.hash = selector.value;
+			window.location.hash = (from_select) ? selector.value : '';
 			this.getDataFile();
+
 		}
 
 	}
