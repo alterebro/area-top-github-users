@@ -101,42 +101,52 @@ function create_data_file() {
 		var all_users = 0;
 		var top_users = [];
 
+		function fileExists(filePath) {
+		    try { return fs.statSync(filePath).isFile(); }
+		    catch (err) { return false; }
+		}
+
 		data['items'] = [];
 		for ( var i=0; i<config.length; i++ ) {
 
 			var item_data_file = './data/' + folders[0] + '/' + config[i].location + '.json';
-			var item_data = fs.readFileSync(item_data_file);
-			    item_data = JSON.parse(item_data);
+			if ( fileExists( item_data_file ) ) {
 
-			var item_data_langs = {};
-				for ( var j=0; j<item_data.length; j++ ) {
+				var item_data = fs.readFileSync(item_data_file);
+				    item_data = JSON.parse(item_data);
 
-					for (var k=0; k<item_data[j]['languages'].length; k++) {
-						// location languages
-						if ( item_data_langs.hasOwnProperty( item_data[j]['languages'][k] ) ) { item_data_langs[item_data[j]['languages'][k]]++; }
-						else { item_data_langs[item_data[j]['languages'][k]] = 1; }
+				var item_data_langs = {};
+					for ( var j=0; j<item_data.length; j++ ) {
 
-						// all languages
-						if ( all_languages.hasOwnProperty( item_data[j]['languages'][k] ) ) { all_languages[item_data[j]['languages'][k]]++; }
-						else { all_languages[item_data[j]['languages'][k]] = 1; }
+						for (var k=0; k<item_data[j]['languages'].length; k++) {
+							// location languages
+							if ( item_data_langs.hasOwnProperty( item_data[j]['languages'][k] ) ) { item_data_langs[item_data[j]['languages'][k]]++; }
+							else { item_data_langs[item_data[j]['languages'][k]] = 1; }
+
+							// all languages
+							if ( all_languages.hasOwnProperty( item_data[j]['languages'][k] ) ) { all_languages[item_data[j]['languages'][k]]++; }
+							else { all_languages[item_data[j]['languages'][k]] = 1; }
+						}
+
+						// Push the top 'n' users for every location
+						if (j<25) {
+							top_users.push(item_data[j]);
+						}
 					}
+				var item_data_langs_sorted = sortObject( item_data_langs );
+					item_data_langs_sorted = item_data_langs_sorted.slice(0, 5);
 
-					// Push the top 'n' users for every location
-					if (j<25) {
-						top_users.push(item_data[j]);
-					}
+				data['items'][i] = {
+					'label' : config[i].label,
+					'location' : config[i].location,
+					'users' : item_data.length,
+					'languages' : item_data_langs_sorted
 				}
-			var item_data_langs_sorted = sortObject( item_data_langs );
-				item_data_langs_sorted = item_data_langs_sorted.slice(0, 5);
 
-			data['items'][i] = {
-				'label' : config[i].label,
-				'location' : config[i].location,
-				'users' : item_data.length,
-				'languages' : item_data_langs_sorted
-			}
+				all_users += item_data.length;
 
-			all_users += item_data.length;
+			} // end if
+
 		}
 
 		data['all_languages'] = sortObject( all_languages ).slice(0, 10);
