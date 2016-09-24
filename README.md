@@ -1,18 +1,29 @@
 ## Top GitHub users from a geographical area population.
 
-Top GitHub users rank generator script for a given geographical area population query.
+Top GitHub users rank generator for a given geographical area script written in NodeJS + VueJS.
 
-***( Unfinished - Work in progress )*** // *[alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/)*
+&mdash; **Project URL :  [alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/)**
 
+This is my first Node.js project so the code might be a bit buggy, the scripting is heavily inspired and based on the original [@paulmillr](https://github.com/paulmillr) repository **[top-github-users](https://github.com/paulmillr/top-github-users)** and also from this adaptation showing data from Spanish users [top-github-users-data](https://github.com/JJ/top-github-users-data/) made by: [@JJ](https://github.com/JJ), both unmaintained on the date of this writing. Feel free to collaborate and open pull requests if you see anything that could be changed.
 
-1. Install dependencies
+---
+
+### Usage
+
+1. Clone it
+
+	```sh
+	$ git clone https://github.com/alterebro/area-top-github-users.git
+	$ cd area-top-github-users/
+	```
+
+2. Install dependencies
 
 	```sh
 	$ sudo npm install
 	```
 
-
-2. Rename `/app/github.sample.js` to `/app/github.js` with your own ID and Secret strings, you can get them by creating a new GitHub application here: [Register a new OAuth application](https://github.com/settings/applications/new)
+3. Rename `/app/github.sample.js` to `/app/github.js` with your own ID and Secret strings, you can get them by creating a new GitHub application here: [Register a new OAuth application](https://github.com/settings/applications/new)
 
 	```javascript
 	exports.github = {
@@ -21,7 +32,7 @@ Top GitHub users rank generator script for a given geographical area population 
 	}
 	```
 
-3. Rename `/app/sample.locations.json` to `/app/locations.json` and edit the file, create as many location items as needed following the same JSON structure as shown below:
+4. Rename `/app/sample.locations.json` to `/app/locations.json` and edit the file, create as many location items as needed following the same JSON structure as shown below:
 
 	```javascript
 	[
@@ -43,7 +54,7 @@ Top GitHub users rank generator script for a given geographical area population 
 	]
 	```
 
-4. Execute main script (app/main.js)
+5. Execute main script (app/main.js)
 
 	```sh
 	$ npm start
@@ -64,3 +75,16 @@ The development HTML file is `./_app.html` and the related scripts and styles ar
 ```sh
 $ gulp
 ```
+
+---
+
+### License
+
+#### The MIT License (MIT)
+Copyright (c) 2016 Jorge Moreno ( [moro.es](http://moro.es), [@alterebro](https://twitter.com/alterebro) )
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
