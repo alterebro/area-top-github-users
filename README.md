@@ -4,7 +4,7 @@ Top GitHub users rank generator for a given geographical area script written in 
 
 &mdash; **Project URL :  [alterebro.github.io/area-top-github-users](https://alterebro.github.io/area-top-github-users/)**
 
-This is my first Node.js project so the code might be a bit buggy, the scripting is heavily inspired and based on the original [@paulmillr](https://github.com/paulmillr) repository **[top-github-users](https://github.com/paulmillr/top-github-users)** and also from this adaptation showing data from Spanish users [top-github-users-data](https://github.com/JJ/top-github-users-data/) made by: [@JJ](https://github.com/JJ), both unmaintained on the date of this writing. Feel free to collaborate and open pull requests if you see anything that could be changed.
+This is my first Node.js project so the code might be (it is) a bit buggy, the scripting is heavily inspired and based on the original [@paulmillr](https://github.com/paulmillr) repository **[top-github-users](https://github.com/paulmillr/top-github-users)** and also from this adaptation showing data from Spanish users [top-github-users-data](https://github.com/JJ/top-github-users-data/) made by: [@JJ](https://github.com/JJ), both unmaintained on the date of this writing. Feel free to collaborate and open pull requests if you see anything that could be changed.
 
 ---
 

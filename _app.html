@@ -74,8 +74,7 @@
 	</main>
 	<main v-else>
 
-		<h2>
-			<strong>{{ current_label }} Data</strong> :
+		<h2><strong>{{ current_label }} Data</strong> :
 			<span v-if="data_json.folders.length > 0" >{{ data_json.folders[1] | format_date }} / </span>
 			<span>{{ data_json.folders[0] | format_date }}</span>
 		</h2>
