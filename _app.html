@@ -61,7 +61,7 @@
 		<select id="location-selector" v-if="data_json.items.length > 1" v-on:change="enroute()" v-model="current_location">
 			<option value="">Global</option>
 			<!-- optgroup label="Locations" -->
-				<option v-for="loc in data_json.items" :value="loc.location"> &ndash; {{ loc.label }}<option>
+				<option v-for="loc in data_json.items" :value="loc.location"> &ndash; {{ loc.label }}</option>
 			<!-- /optgroup -->
 		</select>
 		<hr />
