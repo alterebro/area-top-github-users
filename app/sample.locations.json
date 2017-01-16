@@ -2,6 +2,7 @@
 
     {
         "location" : "pays-basque",
+        "country" : "france",
         "label" : "Pays Basque Français",
         "search" : {
             "include" : ["bayonne", "biarritz", "anglet", "saint-jean-de-luz", "hendaye", "saint-jean-pied-de-port", "mauleon"],
@@ -15,6 +16,7 @@
     },
 	{
         "location" : "euskadi",
+        "country" : "spain",
         "label" : "Euskadi",
         "search" : {
             "include" : ["bilbao", "bilbo", "vizcaya", "bizkaia", "san-sebastian", "donosti", "guipuzcoa", "gipuzkoa", "vitoria", "gasteiz", "alava", "araba"],

@@ -174,7 +174,7 @@ function get_users( location_config ) {
         base_url += '?client_id=' + GITHUB_ID;
         base_url += '&client_secret=' + GITHUB_SECRET;
         base_url += '&q=type:user';
-        base_url += '+location:' + location_config['location']
+        base_url += '+location:' + location_config['location'] + '('+ location_config['country'] +')'
         base_url += '+repos:%3E' + location_config['search']['min_repos']
         base_url += '+followers:%3E' + location_config['search']['min_followers']
         base_url += '+sort:repositories';
