@@ -40,6 +40,7 @@ This is my first Node.js project so the code might be (it is) a bit buggy, the s
 	[
 	    {
 	        "location" : "aquitaine", // main query string
+	        "country" : "france",
 	        "label" : "Aquitaine",
 	        "search" : {
 	            "include" : ["bordeaux", "pau", "merignac", "pessac", "bayonne", "anglet", "bergerac", "biarritz"], // Array of locations to include on the search query
